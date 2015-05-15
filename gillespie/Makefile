@@ -10,10 +10,16 @@ INCLUDE=
 
 all: basic_gillespie.o target
 
+test: basic_gillespie.o testing
+
 basic_gillespie.o: basic_gillespie.cpp basic_gillespie.h timekeeper.h
 	$(CC) $(CFLAGS) $(INCLUDE) -c basic_gillespie.cpp
 
 target: yan_network.cpp basic_gillespie.o
 	$(CC) $(CFLAGS) $(INCLUDE) yan_network.cpp basic_gillespie.o -o yan
+
+testing: testing.cpp basic_gillespie.o
+	$(CC) $(CFLAGS) $(INCLUDE) testing.cpp basic_gillespie.o -o testing
+
 clean: 
-	rm -rf *.o testing *~
+	rm -rf *.o testing yan *~
